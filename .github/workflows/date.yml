@@ -1,0 +1,15 @@
+name: data e hora
+
+on:
+  push:
+    branches: [main]
+    
+jobs:
+  date:
+    runs-on: ubuntu-latest
+    steps:
+      -  name: Checkout code
+         uses: actions/checkout@v3
+
+      -  name: mostrar data e hora
+         run: date
