@@ -1,0 +1,14 @@
+name: usuarios do push
+
+on:
+  push:
+    branches: [main]
+jobs:
+  hello:
+    runs-on: ubuntu-latest
+    steps:
+      -  name: Checkout code
+         uses: actions/checkout@v3
+
+      -  name: Say Hello
+         run: echo "Usuário do GitHub: ${{ github.actor }}"
