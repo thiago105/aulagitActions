@@ -1,0 +1,17 @@
+name: Contar arquivos HTML
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  contar:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout do código
+        uses: actions/checkout@v3
+
+      - name: Contar arquivos HTML
+        run: |
+          qtd=$(find . -name "*.html" | wc -l)
+          echo "Quantidade de arquivos HTML: $qtd"
