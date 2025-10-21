@@ -1,0 +1,13 @@
+name: Rodar aos sábados
+
+on:
+  schedule:
+    - cron: '0 12 * * 6'
+  workflow_dispatch:
+
+jobs:
+  sabado:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Mensagem do sábado
+        run: echo "Executando apenas aos sábados!"
