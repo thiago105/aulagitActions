@@ -1,0 +1,25 @@
+name: Info em sequência
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  info:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout do código
+        uses: actions/checkout@v3
+
+      - name: Mostrar data
+        run: date
+
+      - name: Mostrar usuário
+        run: echo "Usuário: ${{ github.actor }}"
+
+      - name: Contar HTML, CSS e JS
+        run: |
+          html=$(find . -name "*.html" | wc -l)
+          css=$(find . -name "*.css" | wc -l)
+          js=$(find . -name "*.js" | wc -l)
+          echo "HTML: $html, CSS: $css, JS: $js"
