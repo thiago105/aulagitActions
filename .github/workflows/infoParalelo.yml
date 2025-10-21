@@ -1,0 +1,30 @@
+name: Info em paralelo
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  data:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Mostrar data
+        run: date
+
+  usuario:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Mostrar usuário
+        run: echo "Usuário: ${{ github.actor }}"
+
+  contar:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout do código
+        uses: actions/checkout@v3
+      - name: Contar arquivos
+        run: |
+          html=$(find . -name "*.html" | wc -l)
+          css=$(find . -name "*.css" | wc -l)
+          js=$(find . -name "*.js" | wc -l)
+          echo "HTML: $html, CSS: $css, JS: $js"
