@@ -1,0 +1,26 @@
+name: Criar README automático
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  criar:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout do código
+        uses: actions/checkout@v3
+
+      - name: Criar README.txt
+        run: |
+          echo "Projeto automatizado com GitHub Actions" > README.txt
+          echo "Data de criação: $(date)" >> README.txt
+          echo "Usuário: ${{ github.actor }}" >> README.txt
+
+      - name: Commitar mudanças
+        run: |
+          git config --global user.name "${{ github.actor }}"
+          git config --global user.email "${{ github.actor }}@users.noreply.github.com"
+          git add README.txt
+          git commit -m "Adicionando README automático" || echo "Nada para commitar"
+          git push
