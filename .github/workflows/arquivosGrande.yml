@@ -1,0 +1,23 @@
+name: Verificar arquivos grandes
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  verificar:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout do código
+        uses: actions/checkout@v3
+
+      - name: Verificar arquivos > 100KB
+        run: |
+          grandes=$(find . -type f -size +100k)
+          if [ -n "$grandes" ]; then
+            echo "Arquivos maiores que 100KB encontrados:"
+            echo "$grandes"
+            exit 1
+          else
+            echo "Nenhum arquivo acima de 100KB."
+          fi
