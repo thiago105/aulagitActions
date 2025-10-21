@@ -1,0 +1,13 @@
+name: Rodar à noite
+
+on:
+  schedule:
+    - cron: '0 22 * * *'
+  workflow_dispatch:
+
+jobs:
+  noite:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Mensagem da noite
+        run: echo "Executando ação noturna 🌙"
