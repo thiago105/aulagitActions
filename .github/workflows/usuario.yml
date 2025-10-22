@@ -1,15 +1,19 @@
-name: Usuário do push
+name: Mostrar usuario
 
 on:
   push:
-    branches: [main]
+    branches:
+      - main
 
 jobs:
-  user:
+  usuario:
     runs-on: ubuntu-latest
-    steps:
-      - name: Checkout do código
-        uses: actions/checkout@v3
 
-      - name: Mostrar usuário do push
-        run: echo "Usuário do GitHub: ${{ github.actor }}"
+    steps:
+     - name: Usuario checkout
+       uses: actions/checkout@v4
+
+     - name: Get Usuario
+       run: |
+            AUTHOR=$(git log -1 --pretty=format:%an)
+            echo "O autor do commit é: $AUTHOR"
