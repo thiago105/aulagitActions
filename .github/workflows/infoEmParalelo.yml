@@ -1,19 +1,21 @@
-name: Info em sequência
+name: Steps em sequencia
 
 on:
   push:
-    branches: [main]
+    branches:
+      - main
 
 jobs:
-  info:
+  info-push:
     runs-on: ubuntu-latest
     steps:
-        uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
-      - name: Mostrar data
-        run: date
+      - name: Get Data
+        run: |
+              TZ="America/Sao_Paulo" date +"%Y-%m-%d"
 
-      - name: Mostrar usuário
+      - name: Get Usuario
         run: |
             AUTHOR=$(git log -1 --pretty=format:%an)
             echo "O autor do commit é: $AUTHOR"
