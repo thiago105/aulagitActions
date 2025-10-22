@@ -1,26 +1,34 @@
 name: Criar README automático
 
+permissions:
+  contents: write
+
 on:
   push:
     branches: [main]
 
 jobs:
-  criar:
+  arquivo-readme:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout do código
         uses: actions/checkout@v3
 
-      - name: Criar README.txt
+      - name: Criar README.md automático
         run: |
-          echo "Projeto automatizado com GitHub Actions" > README.txt
-          echo "Data de criação: $(date)" >> README.txt
-          echo "Usuário: ${{ github.actor }}" >> README.txt
+          echo "# Gerando Readme.md automaticamente" > README.md
+          echo "" >> README.md
+          echo "## GitHub Actions" >> README.md
+          echo "thiago santos RA: 240055" >> README.md
+
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Commitar mudanças
         run: |
-          git config --global user.name "${{ github.actor }}"
-          git config --global user.email "${{ github.actor }}@users.noreply.github.com"
-          git add README.txt
-          git commit -m "Adicionando README automático" || echo "Nada para commitar"
-          git push
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add README.md
+          git commit -m "Atualizando README.md automaticamente" || echo "Nenhuma mudança para commitar"
+          git push https://x-access-token:${GITHUB_TOKEN}@github.com/${{ github.repository }}.git
