@@ -5,9 +5,11 @@ on:
     branches: [main]
 
 jobs:
-  data:
+  info-push:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v4
+
       - name: Mostrar data
         run: date
 
@@ -15,16 +17,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Mostrar usuário
-        run: echo "Usuário: ${{ github.actor }}"
-
-  contar:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout do código
-        uses: actions/checkout@v3
-      - name: Contar arquivos
         run: |
-          html=$(find . -name "*.html" | wc -l)
-          css=$(find . -name "*.css" | wc -l)
-          js=$(find . -name "*.js" | wc -l)
-          echo "HTML: $html, CSS: $css, JS: $js"
+            AUTHOR=$(git log -1 --pretty=format:%an)
+            echo "O autor do commit é: $AUTHOR"
+
+      - name: Arquivos HTML
+        run: ls | grep '\.html$' | wc -l
+
+      - name: Arquivos CSS
+        run: ls | grep '\.css$' | wc -l
+
+      - name: Arquivos JS
+        run: ls | grep '\.js$' | wc -l
