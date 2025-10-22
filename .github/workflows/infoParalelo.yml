@@ -16,16 +16,9 @@ jobs:
   usuario:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v4
+
       - name: Mostrar usuário
         run: |
-            AUTHOR=$(git log -1 --pretty=format:%an)
-            echo "O autor do commit é: $AUTHOR"
-
-      - name: Arquivos HTML
-        run: ls | grep '\.html$' | wc -l
-
-      - name: Arquivos CSS
-        run: ls | grep '\.css$' | wc -l
-
-      - name: Arquivos JS
-        run: ls | grep '\.js$' | wc -l
+          AUTHOR=$(git log -1 --pretty=format:%an)
+          echo "
