@@ -17,10 +17,10 @@ jobs:
 
       - name: Criar README.md automático
         run: |
-          echo "# Gerando Readme.md automaticamente" > README.md
-          echo "" >> README.md
-          echo "## GitHub Actions" >> README.md
+          echo "# GitHub Actions" >> README.md
           echo "thiago santos RA: 240055" >> README.md
+          echo "## Readme.md criado automatico" > README.md
+          echo "" >> README.md
 
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
